@@ -1,0 +1,172 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum StatusAlumno {
+  INSCRITO
+  NO_INSCRITO
+}
+
+enum StatusGeneral {
+  ACTIVO
+  INACTIVO
+}
+
+enum GravedadReporte {
+  BAJA
+  MEDIA
+  ALTA
+}
+
+enum TipoAcceso {
+  ENTRADA
+  SALIDA
+}
+
+enum MetodoAcceso {
+  FISICA
+  VIRTUAL
+  MANUAL
+}
+
+enum StatusReporte {
+  PENDIENTE
+  EN_PROCESO
+  RESUELTO
+  CANCELADO
+}
+
+model Parentesco {
+  id_parentesco     Int       @id @default(autoincrement())
+  nombre_parentesco String    @db.VarChar(20)
+  created_at        DateTime? @default(now()) @db.Timestamp
+  updated_at        DateTime? @updatedAt @db.Timestamp
+
+  AlumnoTutor AlumnoTutor[]
+}
+
+model TipoReporte {
+  id_tipo_reporte Int            @id @default(autoincrement())
+  nombre_tipo     String         @db.VarChar(50)
+  descripcion     String?        @db.VarChar(191)
+  gravedad        GravedadReporte @default(MEDIA)
+  created_at      DateTime?      @default(now()) @db.Timestamp
+  updated_at      DateTime?      @updatedAt @db.Timestamp
+
+  Reporte Reporte[]
+}
+
+model Alumno {
+  boleta           String         @id @db.VarChar(10)
+  curp             String         @db.VarChar(18)
+  nombre           String         @db.VarChar(100)
+  apellido_paterno String         @db.VarChar(50)
+  apellido_materno String?        @db.VarChar(50)
+  foto             String?        @db.VarChar(255)
+  status           StatusAlumno   @default(INSCRITO)
+
+  Credencial      Credencial[]
+  AlumnoTutor     AlumnoTutor[]
+  RegistroAcceso  RegistroAcceso[]
+  Reporte         Reporte[]
+
+  @@index([nombre, apellido_paterno], name: "idx_alumno_nombre")
+  @@index([curp], name: "idx_alumno_curp")
+  @@index([status], name: "idx_alumno_status")
+}
+
+model Tutor {
+  id_tutor          String        @id @db.Char(36)
+  nombre            String        @db.VarChar(100)
+  apellido_paterno  String        @db.VarChar(50)
+  apellido_materno  String?       @db.VarChar(50)
+  telefono          String?       @db.VarChar(15)
+  email             String?       @db.VarChar(100)
+  direccion         String?       @db.VarChar(191)
+  foto              String?       @db.VarChar(255)
+  fecha_registro    DateTime?     @default(now()) @db.DateTime
+  status            StatusGeneral @default(ACTIVO)
+  created_at        DateTime?     @default(now()) @db.Timestamp
+  updated_at        DateTime?     @updatedAt @db.Timestamp
+
+  AlumnoTutor AlumnoTutor[]
+
+  @@index([nombre, apellido_paterno], name: "idx_tutor_nombre")
+  @@index([telefono], name: "idx_tutor_telefono")
+  @@index([email], name: "idx_tutor_email")
+}
+
+model Credencial {
+  id_credencial      String   @id @db.Char(36)
+  boleta             String   @db.VarChar(10)
+  codigo_qr          String?  @unique @db.VarChar(255)
+  foto               String?  @db.VarChar(191)
+  fecha_emision      DateTime @default(now()) @db.DateTime
+  fecha_vencimiento  DateTime @db.DateTime
+
+  alumno Alumno @relation(fields: [boleta], references: [boleta])
+
+  @@index([boleta], name: "idx_credencial_alumno")
+  @@index([codigo_qr], name: "idx_credencial_qr")
+  @@index([fecha_vencimiento], name: "idx_credencial_vencimiento")
+}
+
+model AlumnoTutor {
+  id_relacion            String        @id @db.Char(36)
+  boleta                 String        @db.VarChar(10)
+  id_tutor               String        @db.Char(36)
+  id_parentesco          Int
+  es_contacto_principal  Int           @default(0)
+  status                 StatusGeneral @default(ACTIVO)
+
+  alumno      Alumno     @relation(fields: [boleta], references: [boleta])
+  tutor       Tutor      @relation(fields: [id_tutor], references: [id_tutor])
+  parentesco  Parentesco @relation(fields: [id_parentesco], references: [id_parentesco])
+
+  @@unique([boleta, id_tutor], name: "unique_alumno_tutor")
+  @@index([boleta], name: "idx_alumno_tutor_alumno")
+  @@index([id_tutor], name: "idx_alumno_tutor_tutor")
+  @@index([es_contacto_principal], name: "idx_contacto_principal")
+}
+
+model RegistroAcceso {
+  id_registro    String       @id @db.Char(36)
+  boleta         String       @db.VarChar(10)
+  tipo_acceso    TipoAcceso
+  metodo_acceso  MetodoAcceso
+  fecha_hora     DateTime?    @default(now()) @db.Timestamp
+
+  alumno Alumno @relation(fields: [boleta], references: [boleta])
+
+  @@index([boleta], name: "idx_registro_alumno")
+  @@index([fecha_hora], name: "idx_registro_fecha")
+  @@index([metodo_acceso], name: "idx_registro_tipo")
+}
+
+model Reporte {
+  id_reporte        String         @id @db.Char(36)
+  boleta            String         @db.VarChar(10)
+  id_tipo_reporte   Int
+  motivo            String         @db.VarChar(191)
+  status            StatusReporte  @default(PENDIENTE)
+  created_at        DateTime?      @default(now()) @db.Timestamp
+  updated_at        DateTime?      @updatedAt @db.Timestamp
+
+  alumno        Alumno      @relation(fields: [boleta], references: [boleta])
+  tipo_reporte  TipoReporte @relation(fields: [id_tipo_reporte], references: [id_tipo_reporte])
+
+  @@index([boleta], name: "idx_reporte_alumno")
+  @@index([id_tipo_reporte], name: "idx_reporte_tipo")
+  @@index([status], name: "idx_reporte_status")
+}
