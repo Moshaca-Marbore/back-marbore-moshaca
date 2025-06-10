@@ -15,7 +15,7 @@ datasource db {
 
 enum StatusAlumno {
   INSCRITO
-  NO_INSCRITO
+  NO_INSCRITO @map("NO INSCRITO")
 }
 
 enum StatusGeneral {

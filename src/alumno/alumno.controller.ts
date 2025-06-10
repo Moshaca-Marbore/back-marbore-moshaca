@@ -1,34 +1,60 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AlumnoService } from './alumno.service';
 import { CreateAlumnoDto } from './dto/create-alumno.dto';
 import { UpdateAlumnoDto } from './dto/update-alumno.dto';
 
-@Controller('alumno')
+@ApiTags('Alumnos')
+@Controller('alumnos')
 export class AlumnoController {
-  constructor(private readonly alumnoService: AlumnoService) {}
+  constructor(private readonly alumnoService: AlumnoService) { }
 
   @Post()
+  @ApiOperation({ summary: 'Crear un nuevo alumno' })
+  @ApiResponse({ status: 201, description: 'Alumno creado exitosamente' })
   create(@Body() createAlumnoDto: CreateAlumnoDto) {
     return this.alumnoService.create(createAlumnoDto);
   }
 
   @Get()
+  @ApiOperation({ summary: 'Obtener todos los alumnos' })
   findAll() {
     return this.alumnoService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.alumnoService.findOne(+id);
+  @Get('search')
+  @ApiOperation({ summary: 'Buscar alumnos por nombre' })
+  search(@Query('name') name: string) {
+    return this.alumnoService.searchByName(name);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAlumnoDto: UpdateAlumnoDto) {
-    return this.alumnoService.update(+id, updateAlumnoDto);
+  @Get(':boleta')
+  @ApiOperation({ summary: 'Obtener un alumno por boleta' })
+  findOne(@Param('boleta') boleta: string) {
+    return this.alumnoService.findOne(boleta);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.alumnoService.remove(+id);
+  @Put(':boleta')
+  @ApiOperation({ summary: 'Actualizar un alumno' })
+  update(
+    @Param('boleta') boleta: string,
+    @Body() updateAlumnoDto: UpdateAlumnoDto,
+  ) {
+    return this.alumnoService.update(boleta, updateAlumnoDto);
+  }
+
+  @Delete(':boleta')
+  @ApiOperation({ summary: 'Eliminar un alumno' })
+  remove(@Param('boleta') boleta: string) {
+    return this.alumnoService.remove(boleta);
   }
 }
