@@ -1,0 +1,13 @@
+{
+    "files.exclude": {
+        "**/.prettierrc": true,
+        "**/dist": true,
+        "**/eslint.config.mjs": true,
+        "**/node_modules": true,
+        "generated": true,
+        "nest-cli.json": true,
+        "tsconfig.*json": true,
+        "package-lock.json": true,
+        "**/migrations": true
+    }
+}
