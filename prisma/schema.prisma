@@ -138,6 +138,8 @@ model AlumnoTutor {
   @@index([boleta], name: "idx_alumno_tutor_alumno")
   @@index([id_tutor], name: "idx_alumno_tutor_tutor")
   @@index([es_contacto_principal], name: "idx_contacto_principal")
+
+  @@map("alumno_tutor")
 }
 
 model RegistroAcceso {
@@ -152,6 +154,7 @@ model RegistroAcceso {
   @@index([boleta], name: "idx_registro_alumno")
   @@index([fecha_hora], name: "idx_registro_fecha")
   @@index([metodo_acceso], name: "idx_registro_tipo")
+  @@map("registro_acceso")
 }
 
 model Reporte {
