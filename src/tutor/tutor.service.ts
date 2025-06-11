@@ -1,26 +1,51 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { randomUUID } from 'node:crypto';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateTutorDto } from './dto/create-tutor.dto';
 import { UpdateTutorDto } from './dto/update-tutor.dto';
 
 @Injectable()
 export class TutorService {
-  create(createTutorDto: CreateTutorDto) {
-    return 'This action adds a new tutor';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createTutorDto: CreateTutorDto) {
+    return this.prisma.tutor.create({
+      data: {
+        id_tutor: randomUUID(),
+        ...createTutorDto
+      }
+    });
   }
 
-  findAll() {
-    return `This action returns all tutor`;
+  async findAll() {
+    return this.prisma.tutor.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tutor`;
+  async findOne(id: string) {
+    const tutor = await this.prisma.tutor.findUnique({
+      where: { id_tutor: id }
+    });
+
+    if (!tutor) {
+      throw new NotFoundException(`Tutor con ID ${id} no encontrado`);
+    }
+
+    return tutor;
   }
 
-  update(id: number, updateTutorDto: UpdateTutorDto) {
-    return `This action updates a #${id} tutor`;
+  async update(id: string, updateTutorDto: UpdateTutorDto) {
+    await this.findOne(id);
+    
+    return this.prisma.tutor.update({
+      where: { id_tutor: id },
+      data: updateTutorDto
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} tutor`;
+  async remove(id: string) {
+    await this.findOne(id);
+    return this.prisma.tutor.delete({
+      where: { id_tutor: id }
+    });
   }
 }
