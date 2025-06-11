@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ParentescoController } from './parentesco.controller';
 import { ParentescoService } from './parentesco.service';
+import { ParentescoController } from './parentesco.controller';
 
 @Module({
   controllers: [ParentescoController],
-  providers: [ParentescoService]
+  providers: [ParentescoService],
 })
 export class ParentescoModule {}

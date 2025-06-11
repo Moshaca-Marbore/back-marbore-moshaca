@@ -65,6 +65,8 @@ model TipoReporte {
   updated_at      DateTime?      @updatedAt @db.Timestamp
 
   Reporte Reporte[]
+
+  @@map("tipo_reporte")
 }
 
 model Alumno {
