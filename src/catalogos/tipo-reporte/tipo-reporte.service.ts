@@ -16,11 +16,16 @@ export class TipoReporteService {
   }
 
   findOne(id: number) {
-    return this.prisma.tipoReporte.findUnique({ where: { id_tipo_reporte: id } });
+    return this.prisma.tipoReporte.findUnique({
+      where: { id_tipo_reporte: id },
+    });
   }
 
   update(id: number, updateTipoReporteDto: UpdateTipoReporteDto) {
-    return this.prisma.tipoReporte.update({ where: { id_tipo_reporte: id }, data: updateTipoReporteDto });
+    return this.prisma.tipoReporte.update({
+      where: { id_tipo_reporte: id },
+      data: updateTipoReporteDto,
+    });
   }
 
   remove(id: number) {

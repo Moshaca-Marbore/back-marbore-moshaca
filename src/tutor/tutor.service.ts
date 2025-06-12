@@ -12,8 +12,8 @@ export class TutorService {
     return this.prisma.tutor.create({
       data: {
         id_tutor: randomUUID(),
-        ...createTutorDto
-      }
+        ...createTutorDto,
+      },
     });
   }
 
@@ -23,7 +23,7 @@ export class TutorService {
 
   async findOne(id: string) {
     const tutor = await this.prisma.tutor.findUnique({
-      where: { id_tutor: id }
+      where: { id_tutor: id },
     });
 
     if (!tutor) {
@@ -35,17 +35,17 @@ export class TutorService {
 
   async update(id: string, updateTutorDto: UpdateTutorDto) {
     await this.findOne(id);
-    
+
     return this.prisma.tutor.update({
       where: { id_tutor: id },
-      data: updateTutorDto
+      data: updateTutorDto,
     });
   }
 
   async remove(id: string) {
     await this.findOne(id);
     return this.prisma.tutor.delete({
-      where: { id_tutor: id }
+      where: { id_tutor: id },
     });
   }
 }

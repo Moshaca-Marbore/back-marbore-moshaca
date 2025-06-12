@@ -8,7 +8,7 @@ export class FilterRegistroDto {
 
   @IsOptional()
   @IsString()
-  @Length(10,10)
+  @Length(10, 10)
   boleta?: string;
 
   @IsOptional()

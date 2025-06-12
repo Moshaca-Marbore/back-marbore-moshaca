@@ -1,9 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ReporteService } from './reporte.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CreateReporteDto } from './dto/create-reporte.dto';
 import { UpdateReporteDto } from './dto/update-reporte.dto';
+import { ReporteService } from './reporte.service';
+import { JwtGuard } from 'src/auth/jwt.guard';
+import { UseGuards } from '@nestjs/common';
+import { Roles } from 'src/auth/roles.decorator';
 
 @Controller('reporte')
+@UseGuards(JwtGuard)
+@Roles('admin')
 export class ReporteController {
   constructor(private readonly reporteService: ReporteService) {}
 

@@ -19,7 +19,10 @@ export class ParentescoService {
   }
 
   update(id: number, updateParentescoDto: UpdateParentescoDto) {
-    return this.prisma.parentesco.update({ where: { id_parentesco: id }, data: updateParentescoDto });
+    return this.prisma.parentesco.update({
+      where: { id_parentesco: id },
+      data: updateParentescoDto,
+    });
   }
 
   remove(id: number) {

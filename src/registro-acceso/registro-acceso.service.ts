@@ -6,7 +6,7 @@ import { FilterRegistroDto } from './dto/filter-registro-acceso.dto';
 
 @Injectable()
 export class RegistroAccesoService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   create(createRegistroAccesoDto: CreateRegistroAccesoDto) {
     return this.prisma.registroAcceso.create({
@@ -14,7 +14,7 @@ export class RegistroAccesoService {
         ...createRegistroAccesoDto,
         ...(createRegistroAccesoDto.fecha_hora
           ? { fecha_hora: createRegistroAccesoDto.fecha_hora }
-          : {})
+          : {}),
       },
     });
   }
@@ -29,20 +29,20 @@ export class RegistroAccesoService {
 
   findOne(id: string) {
     return this.prisma.registroAcceso.findUnique({
-      where: { id_registro: id }
+      where: { id_registro: id },
     });
   }
 
   update(id: string, updateRegistroAccesoDto: UpdateRegistroAccesoDto) {
     return this.prisma.registroAcceso.update({
       where: { id_registro: id },
-      data: updateRegistroAccesoDto
+      data: updateRegistroAccesoDto,
     });
   }
 
   remove(id: string) {
     return this.prisma.registroAcceso.delete({
-      where: { id_registro: id }
+      where: { id_registro: id },
     });
   }
 }

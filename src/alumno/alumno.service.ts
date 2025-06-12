@@ -6,16 +6,14 @@ import { StatusAlumno } from '@prisma/client';
 
 @Injectable()
 export class AlumnoService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async create(createAlumnoDto: CreateAlumnoDto) {
     return this.prisma.alumno.create({
       data: {
         ...createAlumnoDto,
         // Eliminar el campo status si no viene en el DTO
-        ...(createAlumnoDto.status 
-          ? { status: createAlumnoDto.status } 
-          : {})
+        ...(createAlumnoDto.status ? { status: createAlumnoDto.status } : {}),
       },
     });
   }
@@ -37,15 +35,15 @@ export class AlumnoService {
 
   async update(boleta: string, updateAlumnoDto: UpdateAlumnoDto) {
     await this.findOne(boleta);
-    
+
     return this.prisma.alumno.update({
       where: { boleta },
       data: {
         ...updateAlumnoDto,
         // Manejar el campo status de forma consistente
-        ...(updateAlumnoDto.status !== undefined 
-          ? { status: { set: updateAlumnoDto.status } } 
-          : {})
+        ...(updateAlumnoDto.status !== undefined
+          ? { status: { set: updateAlumnoDto.status } }
+          : {}),
       },
     });
   }

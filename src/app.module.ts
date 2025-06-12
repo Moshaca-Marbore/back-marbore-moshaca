@@ -10,10 +10,22 @@ import { PrismaModule } from './prisma/prisma.module';
 import { RegistroAccesoModule } from './registro-acceso/registro-acceso.module';
 import { ReporteModule } from './reporte/reporte.module';
 import { TutorModule } from './tutor/tutor.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [PrismaModule, AlumnoModule, TutorModule, CredencialModule, ReporteModule, RegistroAccesoModule, AlumnoTutorModule, ParentescoModule, TipoReporteModule],
+  imports: [
+    PrismaModule,
+    AlumnoModule,
+    TutorModule,
+    CredencialModule,
+    ReporteModule,
+    RegistroAccesoModule,
+    AlumnoTutorModule,
+    ParentescoModule,
+    TipoReporteModule,
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

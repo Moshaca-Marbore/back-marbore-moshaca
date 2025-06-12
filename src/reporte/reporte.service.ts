@@ -11,9 +11,7 @@ export class ReporteService {
     return this.prisma.reporte.create({
       data: {
         ...createReporteDto,
-        ...(createReporteDto.status 
-          ? { status: createReporteDto.status } 
-          : {})
+        ...(createReporteDto.status ? { status: createReporteDto.status } : {}),
       },
     });
   }
@@ -24,26 +22,26 @@ export class ReporteService {
 
   findOne(id: string) {
     return this.prisma.reporte.findUnique({
-      where: { id_reporte: id }
+      where: { id_reporte: id },
     });
   }
 
   findByBoleta(boleta: string) {
     return this.prisma.reporte.findMany({
-      where: { boleta }
+      where: { boleta },
     });
   }
 
   update(id: string, updateReporteDto: UpdateReporteDto) {
     return this.prisma.reporte.update({
       where: { id_reporte: id },
-      data: updateReporteDto
+      data: updateReporteDto,
     });
   }
 
   remove(id: string) {
     return this.prisma.reporte.delete({
-      where: { id_reporte: id }
+      where: { id_reporte: id },
     });
   }
 }

@@ -1,16 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { 
-  IsString, 
-  IsNotEmpty, 
-  IsOptional, 
-  IsEmail, 
-  IsPhoneNumber 
+import {
+  IsString,
+  IsNotEmpty,
+  IsOptional,
+  IsEmail,
+  IsPhoneNumber,
 } from 'class-validator';
 
 export class CreateTutorDto {
   @ApiProperty({
     description: 'Nombre del tutor',
-    example: 'Juan'
+    example: 'Juan',
   })
   @IsString()
   @IsNotEmpty()
@@ -18,7 +18,7 @@ export class CreateTutorDto {
 
   @ApiProperty({
     description: 'Apellido paterno del tutor',
-    example: 'Pérez'
+    example: 'Pérez',
   })
   @IsString()
   @IsNotEmpty()
@@ -27,7 +27,7 @@ export class CreateTutorDto {
   @ApiProperty({
     description: 'Apellido materno del tutor',
     example: 'López',
-    required: false
+    required: false,
   })
   @IsString()
   @IsOptional()
@@ -36,7 +36,7 @@ export class CreateTutorDto {
   @ApiProperty({
     description: 'Teléfono del tutor',
     example: '+525512345678',
-    required: false
+    required: false,
   })
   @IsPhoneNumber()
   @IsOptional()
@@ -45,7 +45,7 @@ export class CreateTutorDto {
   @ApiProperty({
     description: 'Email del tutor',
     example: 'juan.perez@example.com',
-    required: false
+    required: false,
   })
   @IsEmail()
   @IsOptional()
@@ -54,7 +54,7 @@ export class CreateTutorDto {
   @ApiProperty({
     description: 'Dirección del tutor',
     example: 'Calle Falsa 123',
-    required: false
+    required: false,
   })
   @IsString()
   @IsOptional()
@@ -63,7 +63,7 @@ export class CreateTutorDto {
   @ApiProperty({
     description: 'URL de la foto del tutor',
     example: 'https://example.com/foto.jpg',
-    required: false
+    required: false,
   })
   @IsString()
   @IsOptional()

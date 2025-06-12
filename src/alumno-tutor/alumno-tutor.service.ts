@@ -6,7 +6,7 @@ import { FilterAlumnoTutorDto } from './dto/filter-alumno-tutor.dbo';
 
 @Injectable()
 export class AlumnoTutorService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   create(createAlumnoTutorDto: CreateAlumnoTutorDto) {
     return this.prisma.alumnoTutor.create({

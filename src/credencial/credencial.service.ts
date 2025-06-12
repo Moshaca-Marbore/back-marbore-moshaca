@@ -17,20 +17,20 @@ export class CredencialService {
         ...data,
         fecha_emision: new Date(),
         alumno: {
-          connect: { boleta }
-        }
+          connect: { boleta },
+        },
       },
       include: {
-        alumno: true
-      }
+        alumno: true,
+      },
     });
   }
 
   async findAll() {
     return this.prisma.credencial.findMany({
       include: {
-        alumno: true
-      }
+        alumno: true,
+      },
     });
   }
 
@@ -38,8 +38,8 @@ export class CredencialService {
     const credencial = await this.prisma.credencial.findUnique({
       where: { id_credencial: id },
       include: {
-        alumno: true
-      }
+        alumno: true,
+      },
     });
 
     if (!credencial) {
@@ -51,17 +51,17 @@ export class CredencialService {
 
   async update(id: string, updateCredencialDto: UpdateCredencialDto) {
     await this.findOne(id); // Verifica existencia
-    
+
     return this.prisma.credencial.update({
       where: { id_credencial: id },
-      data: updateCredencialDto
+      data: updateCredencialDto,
     });
   }
 
   async remove(id: string) {
     await this.findOne(id); // Verifica existencia
     return this.prisma.credencial.delete({
-      where: { id_credencial: id }
+      where: { id_credencial: id },
     });
   }
 }

@@ -1,4 +1,10 @@
-import { IsString, IsNotEmpty, Length, IsEnum, IsOptional } from 'class-validator';
+import {
+  IsString,
+  IsNotEmpty,
+  Length,
+  IsEnum,
+  IsOptional,
+} from 'class-validator';
 import { StatusAlumno } from '@prisma/client';
 
 // Función para mapear valores antiguos a nuevos
