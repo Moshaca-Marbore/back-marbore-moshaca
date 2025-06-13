@@ -13,7 +13,7 @@ import { UpdateCredencialDto } from './dto/update-credencial.dto';
 @Injectable()
 export class CredencialService {
   constructor(private prisma: PrismaService) {}
-  
+
   /**
    * Crea una nueva credencial asociada a un alumno.
    *
@@ -45,7 +45,7 @@ export class CredencialService {
       },
     });
   }
-  
+
   /**
    * Obtiene todas las credenciales registradas.
    *
@@ -61,7 +61,7 @@ export class CredencialService {
       },
     });
   }
-  
+
   /**
    * Busca una credencial por su ID único.
    *
@@ -86,7 +86,7 @@ export class CredencialService {
 
     return credencial;
   }
-  
+
   /**
    * Actualiza los datos de una credencial existente.
    *
@@ -106,7 +106,7 @@ export class CredencialService {
       data: updateCredencialDto,
     });
   }
-  
+
   /**
    * Elimina una credencial existente.
    *

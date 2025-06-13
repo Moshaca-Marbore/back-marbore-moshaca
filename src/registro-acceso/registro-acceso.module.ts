@@ -4,7 +4,7 @@ import { RegistroAccesoController } from './registro-acceso.controller';
 
 /**
  * Módulo de NestJS para gestionar registros de acceso.
- * 
+ *
  * Agrupa el controlador y servicio de registros de acceso,
  * junto con sus dependencias.
  */

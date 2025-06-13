@@ -16,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: configService.get<string>('JWT_SECRET') || 'secretKey',
     });
   }
-  
+
   /**
    * Valida y transforma el payload del token JWT.
    *

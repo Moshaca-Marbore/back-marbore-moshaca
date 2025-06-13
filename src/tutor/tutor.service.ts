@@ -6,13 +6,13 @@ import { UpdateTutorDto } from './dto/update-tutor.dto';
 
 /**
  * Servicio para gestionar las operaciones relacionadas con tutores.
- * 
+ *
  * Proporciona métodos para crear, buscar, actualizar y eliminar tutores,
  * así como para listar todos los tutores registrados.
  */
 @Injectable()
 export class TutorService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   /**
    * Crea un nuevo tutor en la base de datos.

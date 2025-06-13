@@ -33,7 +33,7 @@ export class AuthService {
       secret: process.env.JWT_SECRET,
     });
   }
-  
+
   /**
    * Valida y decodifica un token JWT.
    *

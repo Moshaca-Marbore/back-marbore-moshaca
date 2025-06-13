@@ -57,7 +57,7 @@ export class ReporteService {
       where: { id_reporte: id },
     });
   }
-  
+
   /**
    * Busca reportes asociados a una boleta de alumno.
    *

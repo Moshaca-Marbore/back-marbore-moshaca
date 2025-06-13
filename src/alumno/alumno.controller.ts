@@ -27,7 +27,7 @@ import { UpdateAlumnoDto } from './dto/update-alumno.dto';
 @Controller('alumnos')
 @UseGuards(JwtGuard, RolesGuard)
 export class AlumnoController {
-  constructor(private readonly alumnoService: AlumnoService) { }
+  constructor(private readonly alumnoService: AlumnoService) {}
 
   /**
    * Crea un nuevo alumno.

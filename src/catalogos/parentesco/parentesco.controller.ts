@@ -25,7 +25,7 @@ import { Roles } from 'src/auth/roles.decorator';
 export class ParentescoController {
   constructor(private readonly parentescoService: ParentescoService) {}
 
-   /**
+  /**
    * Crea un nuevo tipo de parentesco.
    *
    * @param createParentescoDto - Datos del parentesco.

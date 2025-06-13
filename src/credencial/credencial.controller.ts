@@ -26,7 +26,7 @@ import { UpdateCredencialDto } from './dto/update-credencial.dto';
 @UseGuards(JwtGuard)
 export class CredencialController {
   constructor(private readonly credencialService: CredencialService) {}
-  
+
   /**
    * Crea una nueva credencial.
    * Requiere rol 'alumno'.

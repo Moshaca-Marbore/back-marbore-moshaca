@@ -18,7 +18,7 @@ import { RegistroAccesoService } from './registro-acceso.service';
 
 /**
  * Controlador de API REST para gestionar registros de acceso.
- * 
+ *
  * Requiere autenticación JWT para todas las operaciones.
  * Algunos endpoints requieren rol de administrador.
  */
@@ -38,7 +38,7 @@ export class RegistroAccesoController {
   create(@Body() createRegistroAccesoDto: CreateRegistroAccesoDto) {
     return this.registroAccesoService.create(createRegistroAccesoDto);
   }
-  
+
   /**
    * Obtiene todos los registros de acceso, opcionalmente filtrados.
    * Requiere rol de administrador.

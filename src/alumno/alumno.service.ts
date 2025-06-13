@@ -11,7 +11,7 @@ import { UpdateAlumnoDto } from './dto/update-alumno.dto';
  */
 @Injectable()
 export class AlumnoService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   /**
    * Crea un nuevo alumno en la base de datos.
