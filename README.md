@@ -1,7 +1,6 @@
 # Marbore Moshaca
 
-## Descripción
-Este es un sistema de gestión escolar desarrollado con NestJS, un framework Node.js para la creación de aplicaciones backend escalables y mantenibles.
+Este es un sistema de gestión escolar desarrollado con NestJS, un framework Node.js para la creación de aplicaciones backend escalables y mantenibles. No se que más poner aquí para que se vea bien...
 
 ## Características Principales
 
@@ -28,13 +27,13 @@ Este es un sistema de gestión escolar desarrollado con NestJS, un framework Nod
 src/
 ├── alumno/              # Módulo para gestión de alumnos
 ├── alumno-tutor/        # Módulo para relaciones alumno-tutor
-├── auth/               # Módulo de autenticación
-├── catalogos/          # Catálogos del sistema
-├── credencial/         # Módulo de credenciales
-├── prisma/             # Configuración y modelos de Prisma
-├── registro-acceso/    # Módulo de registro de accesos
-├── reporte/            # Módulo de reportes
-└── tutor/             # Módulo para gestión de tutores
+├── auth/                # Módulo de autenticación
+├── catalogos/           # Catálogos de otros modulos
+├── credencial/          # Módulo de credenciales
+├── prisma/              # Configuración y modelos de Prisma
+├── registro-acceso/     # Módulo de registro de accesos
+├── reporte/             # Módulo de reportes
+└── tutor/               # Módulo para gestión de tutores
 ```
 
 ## Requisitos
