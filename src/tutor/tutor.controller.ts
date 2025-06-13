@@ -15,12 +15,25 @@ import { CreateTutorDto } from './dto/create-tutor.dto';
 import { UpdateTutorDto } from './dto/update-tutor.dto';
 import { TutorService } from './tutor.service';
 
+/**
+ * Controlador de API REST para gestionar tutores.
+ *
+ * Requiere autenticación JWT y maneja permisos basados en roles.
+ * Endpoints disponibles para CRUD de tutores.
+ */
 @ApiTags('Tutores')
 @Controller('tutores')
 @UseGuards(JwtGuard)
 export class TutorController {
   constructor(private readonly tutorService: TutorService) {}
 
+  /**
+   * Crea un nuevo tutor.
+   * Solo accesible por usuarios con rol 'admin'.
+   *
+   * @param createTutorDto - Datos del tutor a crear.
+   * @returns El tutor creado.
+   */
   @Post()
   @ApiOperation({ summary: 'Crear un nuevo tutor' })
   @ApiResponse({ status: 201, description: 'Tutor creado exitosamente' })
@@ -29,6 +42,12 @@ export class TutorController {
     return this.tutorService.create(createTutorDto);
   }
 
+  /**
+   * Obtiene todos los tutores.
+   * Solo accesible por 'admin'.
+   *
+   * @returns Lista de tutores.
+   */
   @Get()
   @ApiOperation({ summary: 'Obtener todos los tutores' })
   @Roles('admin')
@@ -36,6 +55,13 @@ export class TutorController {
     return this.tutorService.findAll();
   }
 
+  /**
+   * Obtiene un tutor por su ID.
+   * Accesible por 'admin' y 'alumno'.
+   *
+   * @param id - ID del tutor.
+   * @returns El tutor encontrado.
+   */
   @Get(':id')
   @ApiOperation({ summary: 'Obtener un tutor por ID' })
   @Roles('admin', 'alumno')
@@ -43,6 +69,14 @@ export class TutorController {
     return this.tutorService.findOne(id);
   }
 
+  /**
+   * Actualiza un tutor existente.
+   * Solo accesible por 'admin'.
+   *
+   * @param id - ID del tutor a actualizar.
+   * @param updateTutorDto - Datos parciales para actualizar.
+   * @returns El tutor actualizado.
+   */
   @Patch(':id')
   @ApiOperation({ summary: 'Actualizar un tutor' })
   @Roles('admin')
@@ -50,6 +84,13 @@ export class TutorController {
     return this.tutorService.update(id, updateTutorDto);
   }
 
+  /**
+   * Elimina un tutor.
+   * Solo accesible por 'admin'.
+   *
+   * @param id - ID del tutor a eliminar.
+   * @returns El tutor eliminado.
+   */
   @Delete(':id')
   @ApiOperation({ summary: 'Eliminar un tutor' })
   @Roles('admin')
