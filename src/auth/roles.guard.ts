@@ -1,15 +1,28 @@
 import {
-  Injectable,
   CanActivate,
   ExecutionContext,
   ForbiddenException,
+  Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
+/**
+ * Guardia para verificación de roles de usuario.
+ *
+ * Implementa la lógica de autorización basada en roles definidos
+ * mediante el decorador @Roles().
+ */
 @Injectable()
 export class RolesGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
+  /**
+   * Verifica si el usuario tiene los roles requeridos para acceder al recurso.
+   *
+   * @param context - Contexto de ejecución de NestJS.
+   * @returns `true` si tiene acceso, lanza excepción si no cumple los requisitos.
+   * @throws ForbiddenException si el usuario no tiene los permisos necesarios.
+   */
   canActivate(context: ExecutionContext): boolean {
     const requiredRoles = this.reflector.get<string[]>(
       'roles',

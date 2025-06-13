@@ -2,6 +2,12 @@ import { Body, Controller, Post, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthService } from './auth.service';
 
+/**
+ * Controlador para operaciones de autenticación.
+ *
+ * Expone endpoints para:
+ * - Login de usuarios (admin/alumno)
+ */
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -9,6 +15,16 @@ export class AuthController {
     private readonly prisma: PrismaService,
   ) {}
 
+  /**
+   * Endpoint de login para usuarios y administradores.
+   *
+   * @param credentials - { boleta, curp, role }
+   * @returns Token JWT válido
+   * @throws UnauthorizedException si las credenciales son inválidas
+   *
+   * @example
+   * POST /auth/login { "boleta": "20230001", "curp": "ABC123", "role": "alumno" }
+   */
   @Post('login')
   async login(
     @Body()
