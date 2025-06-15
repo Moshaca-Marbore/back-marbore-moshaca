@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../common/prisma/prisma.service';
 import { CreateRegistroAccesoDto } from './dto/create-registro-acceso.dto';
 import { UpdateRegistroAccesoDto } from './dto/update-registro-acceso.dto';
 import { FilterRegistroDto } from './dto/filter-registro-acceso.dto';

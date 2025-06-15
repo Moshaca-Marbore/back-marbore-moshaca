@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAlumnoTutorDto } from './dto/create-alumno-tutor.dto';
 import { UpdateAlumnoTutorDto } from './dto/update-alumno-tutor.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from 'src/common/prisma/prisma.service';
 import { FilterAlumnoTutorDto } from './dto/filter-alumno-tutor.dbo';
 
 /**

@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../common/prisma/prisma.service';
 import { CreateCredencialDto } from './dto/create-credencial.dto';
 import { UpdateCredencialDto } from './dto/update-credencial.dto';
 

@@ -9,8 +9,8 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { JwtGuard } from 'src/auth/jwt.guard';
-import { Roles } from 'src/auth/roles.decorator';
+import { JwtGuard } from 'src/modules/auth/jwt.guard';
+import { Roles } from 'src/modules/auth/roles.decorator';
 import { CreateRegistroAccesoDto } from './dto/create-registro-acceso.dto';
 import { FilterRegistroDto } from './dto/filter-registro-acceso.dto';
 import { UpdateRegistroAccesoDto } from './dto/update-registro-acceso.dto';

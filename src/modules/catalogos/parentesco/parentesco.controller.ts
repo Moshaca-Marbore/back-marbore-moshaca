@@ -10,9 +10,9 @@ import {
 import { ParentescoService } from './parentesco.service';
 import { CreateParentescoDto } from './dto/create-parentesco.dto';
 import { UpdateParentescoDto } from './dto/update-parentesco.dto';
-import { JwtGuard } from 'src/auth/jwt.guard';
+import { JwtGuard } from 'src/modules/auth/jwt.guard';
 import { UseGuards } from '@nestjs/common';
-import { Roles } from 'src/auth/roles.decorator';
+import { Roles } from 'src/modules/auth/roles.decorator';
 
 /**
  * Controlador de API REST para el catálogo de parentescos.

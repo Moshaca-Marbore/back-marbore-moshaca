@@ -1,29 +1,17 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
-import { TipoReporteService } from './tipo-reporte.service';
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/common/prisma/prisma.service';
 import { CreateTipoReporteDto } from './dto/create-tipo-reporte.dto';
 import { UpdateTipoReporteDto } from './dto/update-tipo-reporte.dto';
-import { JwtGuard } from 'src/auth/jwt.guard';
-import { UseGuards } from '@nestjs/common';
-import { Roles } from 'src/auth/roles.decorator';
 
 /**
- * Controlador de API REST para tipos de reportes académicos.
+ * Servicio para gestionar los tipos de reportes académicos.
  *
- * Requiere autenticación JWT y rol de administrador para todas las operaciones.
+ * Permite administrar el catálogo de clasificaciones para reportes
+ * (ej: 'Asesoría', 'Incidente', 'Solicitud').
  */
-@Controller('tipo-reporte')
-@UseGuards(JwtGuard)
-@Roles('admin')
-export class TipoReporteController {
-  constructor(private readonly tipoReporteService: TipoReporteService) {}
+@Injectable()
+export class TipoReporteService {
+  constructor(private prisma: PrismaService) {}
 
   /**
    * Crea un nuevo tipo de reporte.
@@ -34,9 +22,8 @@ export class TipoReporteController {
    * @example
    * await create({ nombre: 'Asesoría', descripcion: 'Solicitud de ayuda académica' });
    */
-  @Post()
-  create(@Body() createTipoReporteDto: CreateTipoReporteDto) {
-    return this.tipoReporteService.create(createTipoReporteDto);
+  create(createTipoReporteDto: CreateTipoReporteDto) {
+    return this.prisma.tipoReporte.create({ data: createTipoReporteDto });
   }
 
   /**
@@ -47,9 +34,8 @@ export class TipoReporteController {
    * @example
    * await findAll(); // [{ id_tipo_reporte: 1, nombre: 'Incidente' }, ...]
    */
-  @Get()
   findAll() {
-    return this.tipoReporteService.findAll();
+    return this.prisma.tipoReporte.findMany();
   }
 
   /**
@@ -61,9 +47,10 @@ export class TipoReporteController {
    * @example
    * await findOne(1);
    */
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.tipoReporteService.findOne(+id);
+  findOne(id: number) {
+    return this.prisma.tipoReporte.findUnique({
+      where: { id_tipo_reporte: id },
+    });
   }
 
   /**
@@ -76,12 +63,11 @@ export class TipoReporteController {
    * @example
    * await update(1, { descripcion: 'Problema académico urgente' });
    */
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateTipoReporteDto: UpdateTipoReporteDto,
-  ) {
-    return this.tipoReporteService.update(+id, updateTipoReporteDto);
+  update(id: number, updateTipoReporteDto: UpdateTipoReporteDto) {
+    return this.prisma.tipoReporte.update({
+      where: { id_tipo_reporte: id },
+      data: updateTipoReporteDto,
+    });
   }
 
   /**
@@ -93,8 +79,7 @@ export class TipoReporteController {
    * @example
    * await remove(1);
    */
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tipoReporteService.remove(+id);
+  remove(id: number) {
+    return this.prisma.tipoReporte.delete({ where: { id_tipo_reporte: id } });
   }
 }

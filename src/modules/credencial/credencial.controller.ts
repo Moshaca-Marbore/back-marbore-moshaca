@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtGuard } from 'src/auth/jwt.guard';
-import { Roles } from 'src/auth/roles.decorator';
+import { JwtGuard } from 'src/modules/auth/jwt.guard';
+import { Roles } from 'src/modules/auth/roles.decorator';
 import { CredencialService } from './credencial.service';
 import { CreateCredencialDto } from './dto/create-credencial.dto';
 import { UpdateCredencialDto } from './dto/update-credencial.dto';

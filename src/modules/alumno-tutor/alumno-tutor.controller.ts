@@ -12,9 +12,9 @@ import { AlumnoTutorService } from './alumno-tutor.service';
 import { CreateAlumnoTutorDto } from './dto/create-alumno-tutor.dto';
 import { UpdateAlumnoTutorDto } from './dto/update-alumno-tutor.dto';
 import { FilterAlumnoTutorDto } from './dto/filter-alumno-tutor.dbo';
-import { JwtGuard } from 'src/auth/jwt.guard';
+import { JwtGuard } from 'src/modules/auth/jwt.guard';
 import { UseGuards } from '@nestjs/common';
-import { Roles } from 'src/auth/roles.decorator';
+import { Roles } from 'src/modules/auth/roles.decorator';
 
 /**
  * Controlador de API REST para relaciones alumno-tutor.

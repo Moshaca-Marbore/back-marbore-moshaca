@@ -1,5 +1,5 @@
 import { Body, Controller, Post, UnauthorizedException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from 'src/common/prisma/prisma.service';
 import { AuthService } from './auth.service';
 
 /**

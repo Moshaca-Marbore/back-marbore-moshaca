@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateReporteDto } from './dto/create-reporte.dto';
 import { UpdateReporteDto } from './dto/update-reporte.dto';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../common/prisma/prisma.service';
 
 /**
  * Servicio para gestionar reportes académicos.

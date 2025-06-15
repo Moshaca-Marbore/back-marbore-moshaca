@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtGuard } from 'src/auth/jwt.guard';
+import { JwtGuard } from 'src/modules/auth/jwt.guard';
 import { Roles } from '../auth/roles.decorator';
 import { CreateTutorDto } from './dto/create-tutor.dto';
 import { UpdateTutorDto } from './dto/update-tutor.dto';
